@@ -10,12 +10,14 @@ import org.bukkit.entity.Player
 
 class ReportCommand : CommandExecutor
 {
+    private val prefix: String = MainConfig.prefix
+
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean
     {
         sender as Player
         if (sender.isGliding)
         {
-            sender.msg("${MainConfig.prefix} &cエリトラでの飛行中はレポートできません。")
+            sender.msg("$prefix &cエリトラでの飛行中はレポートできません。")
             return true
         }
 

@@ -6,7 +6,6 @@ import jp.iceserver.icecat.commands.*
 import jp.iceserver.icecat.config.MainConfig
 import jp.iceserver.icecat.listeners.*
 import jp.iceserver.icecat.tables.PlayerData
-import net.milkbowl.vault.economy.Economy
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.StdOutSqlLogger
@@ -21,7 +20,6 @@ class IceCat : AbstractIceCat()
     companion object
     {
         lateinit var plugin: IceCat
-        lateinit var economy: Economy
     }
 
     val invManager: InventoryManager = InventoryManager(this)
@@ -32,15 +30,6 @@ class IceCat : AbstractIceCat()
 
         init(MainConfig)
         MainConfig.autoSave = true
-
-        /*
-        if (!setupEconomy())
-        {
-            logger.severe(String.format("Vaultの依存関係が見つかりません！", description.name))
-            server.pluginManager.disablePlugin(this)
-            return
-        }
-         */
 
         val dbFolder = File(dataFolder, "/database")
         if (!dbFolder.exists()) dbFolder.mkdirs()
@@ -62,7 +51,7 @@ class IceCat : AbstractIceCat()
         invManager.init()
 
         registerListeners(
-            ExplosionPrime(), PlayerConnection()
+            PlayerConnection()
         )
 
         registerCommands(
@@ -70,15 +59,5 @@ class IceCat : AbstractIceCat()
             "nickname" to NickNameCommand(),
             "report" to ReportCommand()
         )
-    }
-
-    private fun setupEconomy(): Boolean
-    {
-        if (server.pluginManager.getPlugin("Vault") == null) return false
-
-        val rsp = server.servicesManager.getRegistration(Economy::class.java) ?: return false
-        economy = rsp.provider
-
-        return true
     }
 }
