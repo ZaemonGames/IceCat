@@ -7,4 +7,5 @@ object MainConfig : PluginConfigFile("config")
     var prefix by string("prefix")
     var reportContents by stringList("reportContents")
     var webhookUrl by string("webhookUrl")
+    var formId by string("formId")
 }

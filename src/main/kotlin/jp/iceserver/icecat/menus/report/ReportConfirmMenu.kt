@@ -52,6 +52,16 @@ class ReportConfirmMenu(private val target: OfflinePlayer, private val reasons: 
             for (size in 0 until reasons.size - (if (reasons.contains("その他")) 2 else 0)) builder.append("${reasons[size].replace("§r", "")}, ")
             builder.setLength(builder.length - 2)
 
+            /* Googleフォームの入力済URLを生成 */
+            val urlBuilder = StringBuilder()
+            urlBuilder.append("https://docs.google.com/forms/d/e/${MainConfig.formId}/viewform?usp=pp_url")
+            urlBuilder.append("&entry.1442425084=${target.name}")
+            for (size in 0 until reasons.size - (if (reasons.contains("その他")) 2 else 0)) {
+                urlBuilder.append("&entry.852176771=${reasons[size].replace("§r", "")}")
+            }
+            if (reasons.contains("その他")) urlBuilder.append("&entry.852176771=__other_option__&entry.852176771.other_option_response=${reasons[reasons.size - 1]}")
+            val formUrl = urlBuilder.toString()
+
             player.playSound(player.location, Sound.BLOCK_NOTE_BLOCK_PLING, 30f, 1f)
             player.msg("$prefix レポートを送信しました！\n&7(対象者: ${target.name}, 理由: ${builder})")
 
@@ -64,6 +74,7 @@ class ReportConfirmMenu(private val target: OfflinePlayer, private val reasons: 
                 .addField(WebhookEmbed.EmbedField(false, "座標", "${player.location.x} ${player.location.y} ${player.location.z}"))
                 .addField(WebhookEmbed.EmbedField(false, "理由", builder.toString()))
                 .addField(WebhookEmbed.EmbedField(false, "その他", if (reasons.contains("その他")) reasons[reasons.size - 1] else "なし"))
+                .addField(WebhookEmbed.EmbedField(false, "処刑後は...", "[報告する](${formUrl})"))
                 .setColor(0xa047ff)
                 .setThumbnailUrl("https://cravatar.eu/avatar/${target.name}/100")
                 .setTimestamp(Instant.ofEpochMilli(System.currentTimeMillis()))
