@@ -20,6 +20,8 @@ import java.time.Instant
 
 class ReportConfirmMenu(private val target: OfflinePlayer, private val reasons: List<String>) : InventoryProvider
 {
+    private val prefix: String = MainConfig.prefix
+
     companion object
     {
         fun inventory(target: OfflinePlayer, reasons: List<String>): SmartInventory = SmartInventory.builder()
@@ -51,7 +53,7 @@ class ReportConfirmMenu(private val target: OfflinePlayer, private val reasons: 
             builder.setLength(builder.length - 2)
 
             player.playSound(player.location, Sound.BLOCK_NOTE_BLOCK_PLING, 30f, 1f)
-            player.msg("${MainConfig.prefix} レポートを送信しました！\n&7(対象者: ${target.name}, 理由: ${builder})")
+            player.msg("$prefix レポートを送信しました！\n&7(対象者: ${target.name}, 理由: ${builder})")
 
             val client = WebhookClient.withUrl("https://discord.com/api/webhooks/1019605403497148477/XeIlBu2DL5x7Z_cH2knWLQUOv7B6UgzhAK9BkUSzzK7f7J6f1pDtXXObJ1lRCsClWAVv")
 
@@ -81,7 +83,7 @@ class ReportConfirmMenu(private val target: OfflinePlayer, private val reasons: 
             i.displayName = "${ChatColor.RED}いいえ"
         }, {
             player.playSound(player.location, Sound.BLOCK_NOTE_BLOCK_BASS, 50f, 1f)
-            player.msg("${MainConfig.prefix} レポートをキャンセルしました。")
+            player.msg("$prefix レポートをキャンセルしました。")
             inventory(player, listOf()).close(player)
         }))
     }

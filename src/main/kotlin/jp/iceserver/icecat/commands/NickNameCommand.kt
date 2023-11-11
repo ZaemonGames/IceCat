@@ -2,6 +2,7 @@ package jp.iceserver.icecat.commands
 
 import hazae41.minecraft.kutils.bukkit.msg
 import jp.iceserver.icecat.IceCat
+import jp.iceserver.icecat.config.MainConfig
 import jp.iceserver.icecat.tables.PlayerData
 import jp.iceserver.icecat.utils.setNickName
 import net.wesjd.anvilgui.AnvilGUI
@@ -16,6 +17,8 @@ import org.jetbrains.exposed.sql.transactions.transaction
 
 class NickNameCommand : CommandExecutor
 {
+    private val prefix: String = MainConfig.prefix
+
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean
     {
         sender as Player
@@ -43,7 +46,7 @@ class NickNameCommand : CommandExecutor
     {
         if (name.length >= 16)
         {
-            player.msg("&cカラーコードを含め16文字以内でのみ使用できます。")
+            player.msg("$prefix &cカラーコードを含め16文字以内でのみ使用できます。")
             return
         }
 
@@ -55,6 +58,6 @@ class NickNameCommand : CommandExecutor
         }
 
         player.setNickName(name.replace("&k", ""))
-        player.msg("&eニックネームを&f「&r${name.replace("&k", "")}&f」&eに変更しました。")
+        player.msg("$prefix &eニックネームを&f「&r${name.replace("&k", "")}&f」&eに変更しました。")
     }
 }

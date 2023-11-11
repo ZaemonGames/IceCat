@@ -20,6 +20,8 @@ import org.bukkit.inventory.meta.SkullMeta
 
 class SelectTargetMenu : InventoryProvider
 {
+    private val prefix: String = MainConfig.prefix
+
     companion object
     {
         val INVENTORY: SmartInventory = SmartInventory.builder()
@@ -52,7 +54,7 @@ class SelectTargetMenu : InventoryProvider
 
             if (target == player)
             {
-                player.msg("${MainConfig.prefix} &c自分自身ををレポートすることはできません。")
+                player.msg("$prefix &c自分自身ををレポートすることはできません。")
                 player.playSound(player.location, Sound.BLOCK_NOTE_BLOCK_BASS, 50f, 1f)
                 INVENTORY.close(player)
                 return@of
@@ -75,13 +77,13 @@ class SelectTargetMenu : InventoryProvider
                     if (!searchedPlayer.hasPlayedBefore())
                     {
                         player.playSound(player.location, Sound.BLOCK_NOTE_BLOCK_BASS, 50f, 1f)
-                        player.msg("${MainConfig.prefix} &cプレイヤーが見つかりませんでした。")
+                        player.msg("$prefix &cプレイヤーが見つかりませんでした。")
                     }
                     else
                     {
                         if (searchedPlayer == player)
                         {
-                            player.msg("${MainConfig.prefix} &c自分自身ををレポートすることはできません。")
+                            player.msg("$prefix &c自分自身ををレポートすることはできません。")
                             player.playSound(player.location, Sound.BLOCK_NOTE_BLOCK_BASS, 50f, 1f)
                             return@onComplete AnvilGUI.Response.close()
                         }
