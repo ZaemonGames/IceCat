@@ -15,17 +15,70 @@ commands:
     permission-message: "§cあなたに実行する権限がありません。"
   report:
     description: レポートをするためのコマンド
+  gamemode:
+    description: ゲームモードを変更するためのコマンド
+    permission: icecat.command.gamemode
 
 permissions:
+  #  global
   icecat.*:
     description: 全権限
     default: op
     children:
       icecat.command.*: true
+
+  #  allCommand
   icecat.command.*:
     description: コマンドの全権限
     children:
       icecat.command.nickname: true
+      icecat.command.gamemode.*: true
+
+  #  nickname
   icecat.command.nickname:
     description: ニックネームの変更をするための権限
     default: op
+
+  #  gamemode
+  icecat.command.gamemode:
+    description: ゲームモードコマンド
+  icecat.command.gamemode.*:
+    description: 全てのゲームモードへ変更するための権限
+    default: op
+    children:
+      icecat.command.gamemode.survival: true
+      icecat.command.gamemode.creative: true
+      icecat.command.gamemode.adventure: true
+      icecat.command.gamemode.spectator: true
+  icecat.command.gamemode.survival:
+    description: サバイバルモードへ変更するための権限
+    children:
+      icecat.command.gamemode: true
+  icecat.command.gamemode.creative:
+    description: クリエイティブモードへ変更するための権限
+    children:
+      icecat.command.gamemode: true
+  icecat.command.gamemode.adventure:
+    description: アドベンチャーモードへ変更するための権限
+    children:
+      icecat.command.gamemode: true
+  icecat.command.gamemode.spectator:
+    description: スペクテイターモードへ変更するための権限
+    children:
+      icecat.command.gamemode: true
+  icecat.command.gamemode.other.*:
+    description: 他のプレイヤーのゲームモードを変更するための権限
+    children:
+      icecat.command.gamemode: true
+      icecat.command.gamemode.other.survival: true
+      icecat.command.gamemode.other.creative: true
+      icecat.command.gamemode.other.adventure: true
+      icecat.command.gamemode.other.spectator: true
+  icecat.command.gamemode.other.survival:
+    description: サバイバルモードへ変更するための権限
+  icecat.command.gamemode.other.creative:
+    description: クリエイティブモードへ変更するための権限
+  icecat.command.gamemode.other.adventure:
+    description: アドベンチャーモードへ変更するための権限
+  icecat.command.gamemode.other.spectator:
+    description: スペクテイターモードへ変更するための権限

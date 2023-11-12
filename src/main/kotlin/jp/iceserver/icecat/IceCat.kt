@@ -2,9 +2,12 @@ package jp.iceserver.icecat
 
 import dev.m1n1don.smartinvsr.inventory.InventoryManager
 import hazae41.minecraft.kutils.bukkit.init
-import jp.iceserver.icecat.commands.*
+import jp.iceserver.icecat.commands.CoiCommand
+import jp.iceserver.icecat.commands.GamemodeCommand
+import jp.iceserver.icecat.commands.NickNameCommand
+import jp.iceserver.icecat.commands.ReportCommand
 import jp.iceserver.icecat.config.MainConfig
-import jp.iceserver.icecat.listeners.*
+import jp.iceserver.icecat.listeners.PlayerConnection
 import jp.iceserver.icecat.tables.PlayerData
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils
@@ -58,6 +61,10 @@ class IceCat : AbstractIceCat()
             "coi" to CoiCommand(),
             "nickname" to NickNameCommand(),
             "report" to ReportCommand()
+        )
+
+        registerCommandsAndCompleters(
+            Pair(Pair("gamemode", GamemodeCommand()), GamemodeCommand())
         )
     }
 }
