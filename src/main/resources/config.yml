@@ -6,6 +6,11 @@
 # - GitHub: https://github.com/IceServerLab/Lobby
 ##
 
+# lang:
+#   本プラグインのシステムメッセージの言語
+#   日本語(ja)のみ対応
+lang: ja
+
 # prefix:
 #   本プラグインのシステムメッセージのプレフィックス
 prefix: ">>"

@@ -1,6 +1,7 @@
 package jp.iceserver.icecat.commands
 
 import hazae41.minecraft.kutils.bukkit.msg
+import jp.iceserver.icecat.IceCat
 import jp.iceserver.icecat.config.MainConfig
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
@@ -15,17 +16,13 @@ class GamemodeCommand : CommandExecutor, TabCompleter
 {
 
     private val prefix = MainConfig.prefix
-    private val noPermissionMsg = "$prefix ${ChatColor.RED}あなたに実行する権限がありません。"
-    private val playerNotFoundMsg = "$prefix ${ChatColor.RED}指定されたプレイヤーが見つかりません。"
-    private val gameModeNotFoundMsg = "$prefix ${ChatColor.RED}指定されたゲームモードは存在しません。"
-    private val selectGamemodeMsg = "$prefix ${ChatColor.RED}ゲームモードを指定してください。"
-    private val selectPlayerMsg = "$prefix ${ChatColor.RED}プレイヤーを指定してください。"
+    private val lang = IceCat.lang
 
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean
     {
         if (args.isEmpty())
         {
-            sender.msg(selectGamemodeMsg)
+            sender.msg(lang.selectGamemodeMsg)
             return true
         }
 
@@ -35,7 +32,7 @@ class GamemodeCommand : CommandExecutor, TabCompleter
         {
             if (args.size < 2)
             {
-                sender.msg(selectPlayerMsg)
+                sender.msg(lang.selectPlayerMsg)
                 return true
             }
             setGamemode(sender, modeName, Bukkit.getPlayerExact(args[1]))
@@ -90,7 +87,7 @@ class GamemodeCommand : CommandExecutor, TabCompleter
             }
             if (!player.hasPermission("icecat.command.gamemode.${gameMode.name.lowercase()}"))
             {
-                player.msg(noPermissionMsg)
+                player.msg(lang.noPermissionMsg)
                 return
             }
             player.gameMode = gameMode
@@ -99,7 +96,7 @@ class GamemodeCommand : CommandExecutor, TabCompleter
                 .forEach { if (it != player) it.msg("$prefix ${player.name}がゲームモードを${gameMode.name}に変更しました。") }
         } catch (e: IllegalArgumentException)
         {
-            player.msg(gameModeNotFoundMsg)
+            player.msg(lang.gameModeNotFoundMsg)
             return
         }
     }
@@ -113,7 +110,7 @@ class GamemodeCommand : CommandExecutor, TabCompleter
 
             if (target == null)
             {
-                player.msg(playerNotFoundMsg)
+                player.msg(lang.playerNotFoundMsg)
                 return
             }
 
@@ -129,7 +126,7 @@ class GamemodeCommand : CommandExecutor, TabCompleter
 
             if (!player.hasPermission("icecat.command.gamemode.other.${gameMode.name.lowercase()}"))
             {
-                player.msg(noPermissionMsg)
+                player.msg(lang.noPermissionMsg)
                 return
             }
 
@@ -148,7 +145,7 @@ class GamemodeCommand : CommandExecutor, TabCompleter
             target.msg("$prefix ${player.name}があなたのゲームモードを${gameMode.name}に変更しました。")
         } catch (e: IllegalArgumentException)
         {
-            player.msg(gameModeNotFoundMsg)
+            player.msg(lang.gameModeNotFoundMsg)
             return
         }
     }
