@@ -9,6 +9,7 @@ abstract class Language
     abstract val selectPlayerMsg: String
     abstract val databaseCorruptedMsg: String
     abstract val homeChangedMsg: String
+    abstract val homeHeightChangedMsg: String
     abstract val teleportedToHomeMsg: String
     abstract val teleportedToDeathPointMsg: String
     abstract val deathPointNotFoundMsg: String

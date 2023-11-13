@@ -23,6 +23,8 @@ object ja : Language()
 
     override val homeChangedMsg = "$prefix ホームが現在地に更新されました。"
 
+    override val homeHeightChangedMsg = "$prefix 設定地点が空中だったため、一番近い地面に高さを変更しました。"
+
     override val teleportedToHomeMsg = "$prefix ホームにテレポートしました。"
 
     override val teleportedToDeathPointMsg = "$prefix 死亡ポイントにテレポートしました。"

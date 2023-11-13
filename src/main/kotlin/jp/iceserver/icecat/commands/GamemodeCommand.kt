@@ -142,7 +142,7 @@ class GamemodeCommand : CommandExecutor, TabCompleter
             player.msg("$prefix ${target.name}のゲームモードを${gameMode.name}に変更しました。")
             Bukkit.getOnlinePlayers().filter { it.hasPermission("group.staff") && it != player }
                 .forEach { if (it != target && it != player) it.msg("$prefix ${player.name}が${target.name}を${gameMode.name}に変更しました。") }
-            target.msg("$prefix ${player.name}があなたのゲームモードを${gameMode.name}に変更しました。")
+            if (target != player) target.msg("$prefix ${player.name}があなたのゲームモードを${gameMode.name}に変更しました。")
         } catch (e: IllegalArgumentException)
         {
             player.msg(lang.gameModeNotFoundMsg)

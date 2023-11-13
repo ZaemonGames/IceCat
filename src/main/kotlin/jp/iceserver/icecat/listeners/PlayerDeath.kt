@@ -27,8 +27,6 @@ class PlayerDeath : Listener
         /* ----- /death ----- */
         if (!player.hasPermission("icecat.command.death")) return
 
-        player.msg(lang.deathDetectedMsg)
-
         val deathLoc = player.location
         if (isAir(deathLoc.block.type))
         {
@@ -37,8 +35,9 @@ class PlayerDeath : Listener
             if (groundHeight != -1)
             {
                 deathLoc.y = groundHeight.toDouble() + 1
+                player.msg(lang.deathDetectedMsg)
                 player.msg(lang.deathPointHeightChangedMsg)
-            }
+            } else return
         }
 
         transaction {
