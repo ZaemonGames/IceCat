@@ -6,6 +6,7 @@ import jp.iceserver.icecat.commands.*
 import jp.iceserver.icecat.config.MainConfig
 import jp.iceserver.icecat.languages.ja
 import jp.iceserver.icecat.listeners.PlayerConnection
+import jp.iceserver.icecat.listeners.PlayerDeath
 import jp.iceserver.icecat.models.Language
 import jp.iceserver.icecat.tables.PlayerData
 import org.jetbrains.exposed.sql.Database
@@ -60,7 +61,7 @@ class IceCat : AbstractIceCat()
         invManager.init()
 
         registerListeners(
-            PlayerConnection()
+            PlayerConnection(), PlayerDeath()
         )
 
         registerCommands(
@@ -72,7 +73,8 @@ class IceCat : AbstractIceCat()
         registerCommandsAndCompleters(
             Pair(Pair("gamemode", GamemodeCommand()), GamemodeCommand()),
             Pair(Pair("home", HomeCommand()), HomeCommand()),
-            Pair(Pair("sethome", SetHomeCommand()), SetHomeCommand())
+            Pair(Pair("sethome", SetHomeCommand()), SetHomeCommand()),
+            Pair(Pair("death", DeathCommand()), DeathCommand())
         )
     }
 }

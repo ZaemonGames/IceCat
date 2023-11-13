@@ -2,7 +2,7 @@ name: IceCat
 version: '2.2.0'
 main: jp.iceserver.icecat.IceCat
 api-version: 1.18
-authors: [ Minidon ]
+authors: [ Minidon, Zaemon ]
 description: アイス生活鯖のインフラ周りを補うためのプラグイン
 website: https://github.com/IceServerLab/IceCat
 
@@ -24,6 +24,9 @@ commands:
   sethome:
     description: ホームを現在地に設定するためのコマンド
     permission: icecat.command.sethome
+  death:
+    description: 死んだポイントまで1度だけテレポートできるコマンド
+    permission: icecat.command.death
 
 permissions:
   #  global
@@ -97,4 +100,9 @@ permissions:
       icecat.command.sethome: true
   icecat.command.sethome:
     description: ホームを現在地に設定するための権限
+    default: true
+
+  # death
+  icecat.command.death:
+    description: 死亡ポイントにてレポートするための権限
     default: true
