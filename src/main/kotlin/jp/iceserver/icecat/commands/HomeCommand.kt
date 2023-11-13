@@ -34,7 +34,7 @@ class HomeCommand : CommandExecutor, TabCompleter
                 {
                     val home = Location(world, x, y, z, yaw, pitch)
                     sender.teleport(home)
-                    sender.msg(lang.teleportedToHome)
+                    sender.msg(lang.teleportedToHomeMsg)
                 }
             }
         }

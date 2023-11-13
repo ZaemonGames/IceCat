@@ -19,9 +19,9 @@ object ja : Language()
     
     override val selectPlayerMsg = "$errPrefix プレイヤーを指定してください。"
 
-    override val databaseCorrupted = "$errPrefix データベースが破損しています。"
+    override val databaseCorruptedMsg = "$errPrefix データベースが破損しています。"
 
-    override val homeChanged = "$prefix ホームが現在地に更新されました。"
+    override val homeChangedMsg = "$prefix ホームが現在地に更新されました。"
 
-    override val teleportedToHome = "$prefix ホームにテレポートしました。"
+    override val teleportedToHomeMsg = "$prefix ホームにテレポートしました。"
 }

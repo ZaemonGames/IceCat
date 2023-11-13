@@ -31,7 +31,7 @@ class SetHomeCommand : CommandExecutor, TabCompleter
                 it[pitch] = current.pitch
             }
         }
-        sender.msg(lang.homeChanged)
+        sender.msg(lang.homeChangedMsg)
         return true
     }
 

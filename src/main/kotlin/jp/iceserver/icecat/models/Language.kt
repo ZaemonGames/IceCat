@@ -7,7 +7,7 @@ abstract class Language
     abstract val gameModeNotFoundMsg: String
     abstract val selectGamemodeMsg: String
     abstract val selectPlayerMsg: String
-    abstract val databaseCorrupted: String
-    abstract val homeChanged: String
-    abstract val teleportedToHome: String
+    abstract val databaseCorruptedMsg: String
+    abstract val homeChangedMsg: String
+    abstract val teleportedToHomeMsg: String
 }
