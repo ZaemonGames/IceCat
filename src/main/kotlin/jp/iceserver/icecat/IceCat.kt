@@ -70,7 +70,9 @@ class IceCat : AbstractIceCat()
         )
 
         registerCommandsAndCompleters(
-            Pair(Pair("gamemode", GamemodeCommand()), GamemodeCommand())
+            Pair(Pair("gamemode", GamemodeCommand()), GamemodeCommand()),
+            Pair(Pair("home", HomeCommand()), HomeCommand()),
+            Pair(Pair("sethome", SetHomeCommand()), SetHomeCommand())
         )
     }
 }

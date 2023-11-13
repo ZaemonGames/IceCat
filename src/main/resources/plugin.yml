@@ -18,6 +18,12 @@ commands:
   gamemode:
     description: ゲームモードを変更するためのコマンド
     permission: icecat.command.gamemode
+  home:
+    description: ホームにテレポートするためのコマンド
+    permission: icecat.command.home
+  sethome:
+    description: ホームを現在地に設定するためのコマンド
+    permission: icecat.command.sethome
 
 permissions:
   #  global
@@ -82,3 +88,13 @@ permissions:
     description: アドベンチャーモードへ変更するための権限
   icecat.command.gamemode.other.spectator:
     description: スペクテイターモードへ変更するための権限
+
+  # home
+  icecat.command.home:
+    description: ホームにてレポートするための権限
+    default: true
+    children:
+      icecat.command.sethome: true
+  icecat.command.sethome:
+    description: ホームを現在地に設定するための権限
+    default: true
