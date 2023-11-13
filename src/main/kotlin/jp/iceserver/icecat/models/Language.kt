@@ -10,4 +10,8 @@ abstract class Language
     abstract val databaseCorruptedMsg: String
     abstract val homeChangedMsg: String
     abstract val teleportedToHomeMsg: String
+    abstract val teleportedToDeathPointMsg: String
+    abstract val deathPointNotFoundMsg: String
+    abstract val deathDetectedMsg: String
+    abstract val deathPointHeightChangedMsg: String
 }
