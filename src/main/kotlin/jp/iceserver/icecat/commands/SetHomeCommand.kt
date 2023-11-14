@@ -25,7 +25,7 @@ class SetHomeCommand : CommandExecutor, TabCompleter
         if (!sender.hasPermission("icecat.command.sethome")) return sender.msg(lang.noPermissionMsg).let { true }
 
         val currentLoc = sender.location
-        if (isAir(currentLoc.block.type))
+        if (isAir(currentLoc.clone().add(0.0, -1.0, 0.0).block.type))
         {
             val groundHeight = findGroundHeight(currentLoc)
 

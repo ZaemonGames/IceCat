@@ -9,10 +9,9 @@ import org.bukkit.World
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.entity.PlayerDeathEvent
+import org.jetbrains.exposed.sql.deleteWhere
 import org.jetbrains.exposed.sql.insert
-import org.jetbrains.exposed.sql.select
 import org.jetbrains.exposed.sql.transactions.transaction
-import org.jetbrains.exposed.sql.update
 
 
 class PlayerDeath : Listener
@@ -24,65 +23,54 @@ class PlayerDeath : Listener
     {
         val player = e.player
 
-        /* ----- /death ----- */
+        /* ----- death ----- */
         if (!player.hasPermission("icecat.command.death")) return
 
         val deathLoc = player.location
-        if (isAir(deathLoc.block.type))
+        player.msg(lang.deathDetectedMsg)
+        if (isAir(deathLoc.clone().add(0.0, -1.0, 0.0).block.type))
         {
             val groundHeight = findGroundHeight(deathLoc)
 
             if (groundHeight != -1)
             {
                 deathLoc.y = groundHeight.toDouble() + 1
-                player.msg(lang.deathDetectedMsg)
                 player.msg(lang.deathPointHeightChangedMsg)
             } else return
         }
 
         transaction {
-            val exist = DeathData.select { DeathData.uniqueId eq player.uniqueId }.any()
-            if (exist)
-            {
-                DeathData.update({ DeathData.uniqueId eq player.uniqueId }) {
-                    it[x] = deathLoc.x
-                    it[y] = deathLoc.y
-                    it[z] = deathLoc.z
-                    it[yaw] = deathLoc.yaw
-                    it[pitch] = deathLoc.pitch
-                }
-            } else
-            {
-                DeathData.insert {
-                    it[uniqueId] = player.uniqueId
-                    it[x] = deathLoc.x
-                    it[y] = deathLoc.y
-                    it[z] = deathLoc.z
-                    it[yaw] = deathLoc.yaw
-                    it[pitch] = deathLoc.pitch
-                }
+            DeathData.deleteWhere { DeathData.uniqueId eq player.uniqueId }
+
+            DeathData.insert {
+                it[uniqueId] = player.uniqueId
+                it[x] = deathLoc.x
+                it[y] = deathLoc.y
+                it[z] = deathLoc.z
+                it[yaw] = deathLoc.yaw
+                it[pitch] = deathLoc.pitch
             }
         }
     }
+}
 
-    private fun isAir(material: Material): Boolean
-    {
-        return material == Material.AIR
-    }
+private fun isAir(material: Material): Boolean
+{
+    return material == Material.AIR
+}
 
-    private fun findGroundHeight(location: Location): Int
+private fun findGroundHeight(location: Location): Int
+{
+    val world: World = location.world
+    val x: Int = location.blockX
+    val y: Int = location.blockY
+    val z: Int = location.blockZ
+    for (i in y downTo 0)
     {
-        val world: World = location.world
-        val x: Int = location.blockX
-        val y: Int = location.blockY
-        val z: Int = location.blockZ
-        for (i in y downTo 0)
+        if (!isAir(world.getBlockAt(x, i, z).type))
         {
-            if (!isAir(world.getBlockAt(x, i, z).type))
-            {
-                return i
-            }
+            return i
         }
-        return -1
     }
+    return -1
 }

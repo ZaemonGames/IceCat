@@ -6,10 +6,8 @@ import java.util.*
 
 object HomeData : Table()
 {
-    private val id: Column<Int> = integer("id").autoIncrement()
-    override val primaryKey = PrimaryKey(id)
-
     val uniqueId: Column<UUID> = uuid("uniqueId")
+    override val primaryKey = PrimaryKey(uniqueId)
 
     val x: Column<Double> = double("x")
     val y: Column<Double> = double("y")

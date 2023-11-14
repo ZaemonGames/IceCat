@@ -19,9 +19,8 @@ class PlayerConnection : Listener
         val player = e.player
 
         /* ----- nickname -----*/
-        if (!player.hasPermission("icecat.command.nickname")) return
-
         transaction {
+            if (!player.hasPermission("icecat.command.nickname")) return@transaction
             PlayerData.select { PlayerData.uniqueId eq player.uniqueId }.forEach {
                 player.setNickName(it[PlayerData.nickname])
             }
@@ -29,9 +28,8 @@ class PlayerConnection : Listener
 
 
         /* ----- home -----*/
-        if (!player.hasPermission("icecat.command.sethome")) return
-
         transaction {
+            if (!player.hasPermission("icecat.command.sethome")) return@transaction
             val exist = HomeData.select { HomeData.uniqueId eq player.uniqueId }.any()
 
             if (!exist)

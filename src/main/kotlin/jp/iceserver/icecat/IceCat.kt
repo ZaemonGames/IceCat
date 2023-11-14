@@ -8,6 +8,8 @@ import jp.iceserver.icecat.languages.ja
 import jp.iceserver.icecat.listeners.PlayerConnection
 import jp.iceserver.icecat.listeners.PlayerDeath
 import jp.iceserver.icecat.models.Language
+import jp.iceserver.icecat.tables.DeathData
+import jp.iceserver.icecat.tables.HomeData
 import jp.iceserver.icecat.tables.PlayerData
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils
@@ -54,7 +56,9 @@ class IceCat : AbstractIceCat()
             addLogger(StdOutSqlLogger)
 
             SchemaUtils.create(
-                PlayerData
+                PlayerData,
+                HomeData,
+                DeathData
             )
         }
 
