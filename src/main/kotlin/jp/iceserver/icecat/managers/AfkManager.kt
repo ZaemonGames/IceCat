@@ -40,6 +40,7 @@ object AfkManager
         afkPlayers[uniqueId] = mode
         startLocations[uniqueId] = player.location
         player.setNickName("[AFK]${player.name}")
+        player.isSleepingIgnored = true
         if (byAdmin) player.msg(lang.becameAfkByAdminMsg) else player.msg(lang.becameAfkMsg)
     }
 
@@ -60,6 +61,7 @@ object AfkManager
                     }
                 }
             }
+            player.isSleepingIgnored = false
             if (afkPlayers.isEmpty()) afkChecker?.cancel()
             player.sendActionBar(Component.empty())
             player.msg(lang.afkRemovedMsg)
