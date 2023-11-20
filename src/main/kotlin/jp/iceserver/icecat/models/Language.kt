@@ -15,4 +15,8 @@ abstract class Language
     abstract val deathPointNotFoundMsg: String
     abstract val deathDetectedMsg: String
     abstract val deathPointHeightChangedMsg: String
+    abstract val afkModeNotFoundMsg: String
+    abstract val becameAfkMsg: String
+    abstract val becameAfkByAdminMsg: String
+    abstract val afkRemovedMsg: String
 }

@@ -5,6 +5,7 @@ import hazae41.minecraft.kutils.bukkit.init
 import jp.iceserver.icecat.commands.*
 import jp.iceserver.icecat.config.MainConfig
 import jp.iceserver.icecat.languages.ja
+import jp.iceserver.icecat.listeners.AfkListener
 import jp.iceserver.icecat.listeners.PlayerConnection
 import jp.iceserver.icecat.listeners.PlayerDeath
 import jp.iceserver.icecat.models.Language
@@ -65,7 +66,7 @@ class IceCat : AbstractIceCat()
         invManager.init()
 
         registerListeners(
-            PlayerConnection(), PlayerDeath()
+            PlayerConnection(), PlayerDeath(), AfkListener()
         )
 
         registerCommands(
@@ -78,7 +79,8 @@ class IceCat : AbstractIceCat()
             Pair(Pair("gamemode", GamemodeCommand()), GamemodeCommand()),
             Pair(Pair("home", HomeCommand()), HomeCommand()),
             Pair(Pair("sethome", SetHomeCommand()), SetHomeCommand()),
-            Pair(Pair("death", DeathCommand()), DeathCommand())
+            Pair(Pair("death", DeathCommand()), DeathCommand()),
+            Pair(Pair("afk", AfkCommand()), AfkCommand()),
         )
     }
 }

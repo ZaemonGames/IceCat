@@ -2,6 +2,8 @@ package jp.iceserver.icecat.listeners
 
 import jp.iceserver.icecat.tables.HomeData
 import jp.iceserver.icecat.tables.PlayerData
+import jp.iceserver.icecat.utils.isAfk
+import jp.iceserver.icecat.utils.removeAfk
 import jp.iceserver.icecat.utils.setNickName
 import org.bukkit.Bukkit
 import org.bukkit.event.EventHandler
@@ -18,30 +20,37 @@ class PlayerConnection : Listener
     {
         val player = e.player
 
+        /* ----- afk ----- */
+        if (player.isAfk()) player.removeAfk()
+
         /* ----- nickname -----*/
-        transaction {
-            if (!player.hasPermission("icecat.command.nickname")) return@transaction
-            PlayerData.select { PlayerData.uniqueId eq player.uniqueId }.forEach {
-                player.setNickName(it[PlayerData.nickname])
+        if (player.hasPermission("icecat.command.nickname"))
+        {
+            transaction {
+                PlayerData.select { PlayerData.uniqueId eq player.uniqueId }.forEach {
+                    player.setNickName(it[PlayerData.nickname])
+                }
             }
         }
 
 
         /* ----- home -----*/
-        transaction {
-            if (!player.hasPermission("icecat.command.sethome")) return@transaction
-            val exist = HomeData.select { HomeData.uniqueId eq player.uniqueId }.any()
+        if (player.hasPermission("icecat.command.sethome"))
+        {
+            transaction {
+                val exist = HomeData.select { HomeData.uniqueId eq player.uniqueId }.any()
 
-            if (!exist)
-            {
-                val worldSpawn = Bukkit.getWorld("world")?.spawnLocation ?: return@transaction
-                HomeData.insert {
-                    it[uniqueId] = player.uniqueId
-                    it[x] = worldSpawn.x
-                    it[y] = worldSpawn.y
-                    it[z] = worldSpawn.z
-                    it[yaw] = worldSpawn.yaw
-                    it[pitch] = worldSpawn.pitch
+                if (!exist)
+                {
+                    val worldSpawn = Bukkit.getWorld("world")?.spawnLocation ?: return@transaction
+                    HomeData.insert {
+                        it[uniqueId] = player.uniqueId
+                        it[x] = worldSpawn.x
+                        it[y] = worldSpawn.y
+                        it[z] = worldSpawn.z
+                        it[yaw] = worldSpawn.yaw
+                        it[pitch] = worldSpawn.pitch
+                    }
                 }
             }
         }

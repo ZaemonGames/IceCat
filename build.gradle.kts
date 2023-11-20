@@ -12,7 +12,7 @@ java.sourceCompatibility = JavaVersion.VERSION_17
 repositories {
     mavenCentral()
     maven ("https://papermc.io/repo/repository/maven-public/")
-    maven  ("https://oss.sonatype.org/content/groups/public/")
+    maven ("https://oss.sonatype.org/content/groups/public/")
     maven ("https://jitpack.io")
     maven ("https://repo.codemc.io/repository/maven-snapshots/")
 }

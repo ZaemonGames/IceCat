@@ -35,4 +35,12 @@ object ja : Language()
             "${" ".repeat(prefix.length + 2)}1度だけ死亡ポイントに戻ることができます: ${ChatColor.YELLOW}/death"
 
     override val deathPointHeightChangedMsg = "$prefix 死亡地点が空中だったため、一番近い地面に高さを変更しました。"
+
+    override val afkModeNotFoundMsg = "$errPrefix 指定されたモードは存在しません。"
+
+    override val becameAfkMsg = "$prefix Afkになりました。解除するには: /afk"
+
+    override val becameAfkByAdminMsg = "$prefix あなたは管理者によってAfkにされました。解除するには: /afk"
+
+    override val afkRemovedMsg: String = "$prefix Afkが解除されました。"
 }

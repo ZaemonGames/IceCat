@@ -27,6 +27,9 @@ commands:
   death:
     description: 死んだポイントまで1度だけテレポートできるコマンド
     permission: icecat.command.death
+  afk:
+    description: Afkを切り替えるためのコマンド
+    permission: icecat.command.afk
 
 permissions:
   #  global
@@ -106,3 +109,11 @@ permissions:
   icecat.command.death:
     description: 死亡ポイントにてレポートするための権限
     default: true
+
+  # afk
+  icecat.command.afk:
+    description: 自身のAfkを切り替えるための権限
+    default: true
+  icecat.command.afk.other:
+    description: 他人のAfkを切り替えるための権限
+    default: op

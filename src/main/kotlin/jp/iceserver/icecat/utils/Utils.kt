@@ -1,5 +1,7 @@
 package jp.iceserver.icecat.utils
 
+import jp.iceserver.icecat.managers.AfkManager
+import jp.iceserver.icecat.models.AfkMode
 import net.kyori.adventure.text.Component
 import org.bukkit.ChatColor
 import org.bukkit.Material
@@ -30,3 +32,23 @@ fun Player.setNickName(name: String)
 
 fun Int.getSlotPos(): Pair<Int, Int>
     = Pair(floor(this.toDouble() / 9).toInt(), (this - floor(this.toDouble() / 9) * 9).toInt())
+
+fun Player.isAfk(): Boolean
+{
+    return AfkManager.isAfk(this.player!!)
+}
+
+fun Player.removeAfk()
+{
+    AfkManager.removeAfk(this.player!!)
+}
+
+fun Player.toggleAfk(mode: AfkMode, byAdmin: Boolean)
+{
+    AfkManager.toggleAfk(this.player!!, mode, byAdmin)
+}
+
+fun Player.getAfkMode(): AfkMode
+{
+    return AfkManager.getAfkMode(this.player!!)
+}
