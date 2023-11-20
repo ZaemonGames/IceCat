@@ -9,6 +9,7 @@ object DeathData : Table()
     val uniqueId: Column<UUID> = uuid("uniqueId")
     override val primaryKey = PrimaryKey(uniqueId)
 
+    val world: Column<String> = text("world")
     val x: Column<Double> = double("x")
     val y: Column<Double> = double("y")
     val z: Column<Double> = double("z")

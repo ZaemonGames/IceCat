@@ -44,6 +44,7 @@ class PlayerDeath : Listener
 
             DeathData.insert {
                 it[uniqueId] = player.uniqueId
+                it[world] = deathLoc.world.name
                 it[x] = deathLoc.x
                 it[y] = deathLoc.y
                 it[z] = deathLoc.z

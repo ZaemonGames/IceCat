@@ -33,7 +33,7 @@ class DeathCommand : CommandExecutor, TabCompleter
             }
 
             query.forEach {
-                val world = Bukkit.getWorld("world")
+                val world = Bukkit.getWorld(it[DeathData.world])
                 val x = it[DeathData.x]
                 val y = it[DeathData.y]
                 val z = it[DeathData.z]
