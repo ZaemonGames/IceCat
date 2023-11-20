@@ -43,4 +43,6 @@ object ja : Language()
     override val becameAfkByAdminMsg = "$prefix あなたは管理者によってAfkにされました。解除するには: /afk"
 
     override val afkRemovedMsg: String = "$prefix Afkが解除されました。"
+
+    override val invalidHomeWorldMsg = "$errPrefix メインワールド以外をホームに設定することはできません！"
 }
