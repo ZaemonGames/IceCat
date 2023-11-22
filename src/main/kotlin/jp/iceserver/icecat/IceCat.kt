@@ -50,7 +50,13 @@ class IceCat : AbstractIceCat()
         val dbFile = File(dataFolder, "/database/icecat.db")
         if (!dbFile.exists()) dbFile.createNewFile()
 
-        Database.connect("jdbc:sqlite:${dbFile.path}", "org.sqlite.JDBC")
+        val mysqlConfig = MainConfig.MysqlSection
+        Database.connect(
+            "jdbc:mysql://${mysqlConfig.host}:${mysqlConfig.port}/${mysqlConfig.name}",
+            driver = "com.mysql.cj.jdbc.Driver",
+            user = mysqlConfig.user,
+            password = mysqlConfig.pass
+        )
         TransactionManager.manager.defaultIsolationLevel = Connection.TRANSACTION_SERIALIZABLE
 
         transaction {

@@ -35,3 +35,10 @@ reportContents:
 webhookUrl: ""
 
 formId: ""
+
+mysql:
+  host:
+  port:
+  user:
+  pass:
+  name:
