@@ -4,7 +4,7 @@ import org.jetbrains.exposed.sql.Column
 import org.jetbrains.exposed.sql.Table
 import java.util.*
 
-object HomeData : Table()
+object HomeData : Table("home")
 {
     val uniqueId: Column<UUID> = uuid("uniqueId")
     override val primaryKey = PrimaryKey(uniqueId)
