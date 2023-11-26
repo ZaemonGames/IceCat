@@ -12,6 +12,8 @@ import jp.iceserver.icecat.models.Language
 import jp.iceserver.icecat.tables.DeathData
 import jp.iceserver.icecat.tables.HomeData
 import jp.iceserver.icecat.tables.PlayerData
+import net.luckperms.api.LuckPerms
+import net.luckperms.api.LuckPermsProvider
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.StdOutSqlLogger
@@ -27,6 +29,7 @@ class IceCat : AbstractIceCat()
     {
         lateinit var plugin: IceCat
         lateinit var lang: Language
+        lateinit var lp: LuckPerms
     }
 
     val invManager: InventoryManager = InventoryManager(this)
@@ -70,6 +73,7 @@ class IceCat : AbstractIceCat()
         }
 
         invManager.init()
+        lp = LuckPermsProvider.get()
 
         registerListeners(
             PlayerConnection(), PlayerDeath(), AfkListener()
@@ -87,6 +91,7 @@ class IceCat : AbstractIceCat()
             Pair(Pair("sethome", SetHomeCommand()), SetHomeCommand()),
             Pair(Pair("death", DeathCommand()), DeathCommand()),
             Pair(Pair("afk", AfkCommand()), AfkCommand()),
+            Pair(Pair("staff", StaffCommand()), StaffCommand())
         )
     }
 }

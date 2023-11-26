@@ -45,4 +45,12 @@ object ja : Language()
     override val afkRemovedMsg: String = "$prefix Afkが解除されました。"
 
     override val invalidHomeWorldMsg = "$errPrefix メインワールド以外をホームに設定することはできません！"
+
+    override val becameStaffMsg = "$prefix スタッフになりました。"
+
+    override val selectedPlayerBecameStaffMsg = "$prefix %playerがスタッフになりました。"
+
+    override val noLongerStaffMsg = "$prefix スタッフではなくなりました。"
+
+    override val selectedPlayerNoLongerStaffMsg = "$prefix %playerがスタッフではなくなりました。"
 }

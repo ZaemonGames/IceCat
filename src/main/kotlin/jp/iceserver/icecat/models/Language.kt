@@ -20,4 +20,8 @@ abstract class Language
     abstract val becameAfkByAdminMsg: String
     abstract val afkRemovedMsg: String
     abstract val invalidHomeWorldMsg: String
+    abstract val becameStaffMsg: String
+    abstract val selectedPlayerBecameStaffMsg: String
+    abstract val noLongerStaffMsg: String
+    abstract val selectedPlayerNoLongerStaffMsg: String
 }

@@ -32,6 +32,7 @@ dependencies {
     implementation("com.github.M1n1don", "SmartInvsR", "2.0.0")
     implementation("com.github.hazae41", "mc-kutils", "master-SNAPSHOT")
 
+    compileOnly("net.luckperms:api:5.4")
     compileOnly("com.github.MilkBowl", "VaultAPI", "1.7")
     compileOnly("io.papermc.paper:paper-api:1.18.2-R0.1-SNAPSHOT")
 }

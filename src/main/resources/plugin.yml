@@ -5,6 +5,8 @@ api-version: 1.18
 authors: [ Minidon, Zaemon ]
 description: アイス生活鯖のインフラ周りを補うためのプラグイン
 website: https://github.com/IceServerLab/IceCat
+depend:
+  - LuckPerms
 
 commands:
   coi:
@@ -30,6 +32,9 @@ commands:
   afk:
     description: Afkを切り替えるためのコマンド
     permission: icecat.command.afk
+  staff:
+    description: スタッフと一般を切り替えるためのコマンド
+    permission: icecat.command.staff
 
 permissions:
   #  global
@@ -116,4 +121,12 @@ permissions:
     default: true
   icecat.command.afk.other:
     description: 他人のAfkを切り替えるための権限
+    default: op
+
+  # staff
+  icecat.command.staff:
+    description: 自身のスタッフと一般を切り替えるための権限
+    default: op
+  icecat.command.staff.other:
+    description: 他人のスタッフと一般を切り替えるための権限
     default: op
