@@ -4,9 +4,11 @@ import hazae41.minecraft.kutils.bukkit.msg
 import jp.iceserver.icecat.IceCat
 import net.luckperms.api.node.Node
 import org.bukkit.Bukkit
+import org.bukkit.OfflinePlayer
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
+import org.bukkit.command.ConsoleCommandSender
 import org.bukkit.command.TabCompleter
 import org.bukkit.entity.Player
 import java.util.*
@@ -17,6 +19,7 @@ class StaffCommand : CommandExecutor, TabCompleter
     private val lp = IceCat.lp
     private val lang = IceCat.lang
     private val staffGroupName = "staff"
+    private val console = Bukkit.getConsoleSender()
 
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>?): Boolean
     {
@@ -56,13 +59,13 @@ class StaffCommand : CommandExecutor, TabCompleter
         }
 
         val target = Bukkit.getOfflinePlayer(targetName)
-        if (!target.hasPlayedBefore() || target.player == null)
+        if (!target.hasPlayedBefore())
         {
             sender.msg(lang.playerNotFoundMsg)
             return
         }
 
-        toggle(target.player!!, sender)
+        toggle(target, sender)
     }
 
     private fun isStaff(uuid: UUID): CompletableFuture<Boolean>
@@ -74,7 +77,7 @@ class StaffCommand : CommandExecutor, TabCompleter
             }
     }
 
-    private fun toggle(target: Player, sender: CommandSender? = null)
+    private fun toggle(target: OfflinePlayer, sender: CommandSender? = null)
     {
         val uuid = target.uniqueId
         isStaff(uuid).thenAcceptAsync { isStaff ->
@@ -84,15 +87,15 @@ class StaffCommand : CommandExecutor, TabCompleter
                 if (isStaff)
                 {
                     user.data().remove(node)
-                    if (target != sender) target.msg(lang.noLongerStaffMsg)
-                    Bukkit.getConsoleSender().msg(lang.selectedPlayerNoLongerStaffMsg.replace("%player", target.name))
-                    sender?.msg(lang.selectedPlayerNoLongerStaffMsg.replace("%player", target.name))
+                    if (target != sender && target is Player) target.msg(lang.noLongerStaffMsg)
+                    if (sender !is ConsoleCommandSender) console.msg(lang.selectedPlayerNoLongerStaffMsg.replace("%player", target.name!!))
+                    sender?.msg(lang.selectedPlayerNoLongerStaffMsg.replace("%player", target.name!!))
                 } else
                 {
                     user.data().add(node)
-                    if (target != sender) target.msg(lang.becameStaffMsg)
-                    Bukkit.getConsoleSender().msg(lang.selectedPlayerBecameStaffMsg.replace("%player", target.name))
-                    sender?.msg(lang.selectedPlayerBecameStaffMsg.replace("%player", target.name))
+                    if (target != sender && target is Player) target.msg(lang.becameStaffMsg)
+                    if (sender !is ConsoleCommandSender) console.msg(lang.selectedPlayerBecameStaffMsg.replace("%player", target.name!!))
+                    sender?.msg(lang.selectedPlayerBecameStaffMsg.replace("%player", target.name!!))
                 }
             }
         }
