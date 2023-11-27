@@ -19,4 +19,9 @@ object MainConfig : PluginConfigFile("config")
         val pass by string("pass")
         val name by string("name")
     }
+
+    object WebServerSection : ConfigSection(MainConfig, "webserver")
+    {
+        val port by int("port")
+    }
 }

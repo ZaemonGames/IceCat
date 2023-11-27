@@ -15,6 +15,7 @@ repositories {
     maven ("https://oss.sonatype.org/content/groups/public/")
     maven ("https://jitpack.io")
     maven ("https://repo.codemc.io/repository/maven-snapshots/")
+    maven ("https://repo.opencollab.dev/main/")
 }
 
 dependencies {
@@ -26,7 +27,11 @@ dependencies {
     implementation("org.jetbrains.exposed:exposed-jdbc:$exposedVersion")
     implementation("mysql:mysql-connector-java:8.0.33")
 
-    implementation("club.minnced:discord-webhooks:0.8.4")
+    implementation("club.minnced", "discord-webhooks", "0.8.4")
+    implementation("io.ktor","ktor-server-core-jvm", "2.3.6")
+    implementation("io.ktor", "ktor-server-netty-jvm", "2.3.6")
+    implementation("net.coobird", "thumbnailator", "0.4.14")
+    implementation("com.beust", "klaxon", "5.5")
 
     implementation("net.wesjd", "anvilgui", "1.5.3-SNAPSHOT")
     implementation("com.github.M1n1don", "SmartInvsR", "2.0.0")
@@ -35,6 +40,7 @@ dependencies {
     compileOnly("net.luckperms:api:5.4")
     compileOnly("com.github.MilkBowl", "VaultAPI", "1.7")
     compileOnly("io.papermc.paper:paper-api:1.18.2-R0.1-SNAPSHOT")
+    compileOnly("org.geysermc.floodgate:api:2.2.2-SNAPSHOT")
 }
 
 tasks {
