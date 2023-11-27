@@ -37,7 +37,7 @@ class IceCat : AbstractIceCat()
         lateinit var lang: Language
         lateinit var lp: LuckPerms
         lateinit var fg: FloodgateApi
-        val datafolder = plugin.dataFolder
+        lateinit var datafolder: File
     }
 
     val invManager: InventoryManager = InventoryManager(this)
@@ -48,6 +48,7 @@ class IceCat : AbstractIceCat()
 
         init(MainConfig)
         MainConfig.autoSave = true
+        datafolder = this.dataFolder
 
         lang = when (MainConfig.language)
         {
