@@ -1,4 +1,4 @@
-package jp.iceserver.icecat.web
+package jp.iceserver.icecat.web.routes
 
 import io.ktor.http.*
 import io.ktor.server.application.*
